@@ -18,10 +18,11 @@ export default class TempTextZoneScene extends Phaser.Scene {
     COLOR_DARK = 0x260e04;
 
 
-    constructor () {
-        super('Texte');
+    constructor (sceneName) {
+        super(sceneName);
     }
     preload() {
+        console.log('bbb')
         this.load.scenePlugin({
             key: 'rexuiplugin',
             url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
@@ -100,7 +101,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
         //.on('type', function () {
         //})
         textBox.on('complete', function() {
-           setTimeout(() => {textBox.destroy()}, 5000)
+           //setTimeout(() => {textBox.destroy()}, 5000)
         }, scene);
         return textBox;
     }

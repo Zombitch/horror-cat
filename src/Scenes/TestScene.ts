@@ -1,10 +1,11 @@
 import 'phaser';
 import LevelObject from '../Models/LevelObject';
+import TempTextZoneScene from './TempTextZoneScene'
 
 /**
  * Scène du jeu
  */
-export default class TestScene extends Phaser.Scene {
+export default class TestScene extends TempTextZoneScene {
 
     protected levelObjects: LevelObject[] = [
         new LevelObject('bedroom', 0, 0, false),
@@ -17,6 +18,7 @@ export default class TestScene extends Phaser.Scene {
     }
     
     preload(): void {
+        super.preload();
         let loadedImages: string[] = [];
         this.levelObjects.forEach(obj => {
             // On ne charge les images qu'une seule fois, même si dans la propriété 'levelObjects' de la scene nous avons plusieurs fois la même image
@@ -29,5 +31,7 @@ export default class TestScene extends Phaser.Scene {
 
     create():void {
         this.levelObjects.forEach(obj => this.add.image(0, 0, obj.name).setOrigin(0, 0));
+
+        this.ajouterTexte(this, 'fucking pos', 'asshole', 80);
     }
 };
