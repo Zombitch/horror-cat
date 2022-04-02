@@ -1,11 +1,14 @@
 import 'phaser';
 import LevelObject from '../Models/LevelObject';
 import TempTextZoneScene from './TempTextZoneScene'
+import {Cat} from "../Objects/Cat";
 
 /**
  * Scène du jeu
  */
 export default class TestScene extends TempTextZoneScene {
+
+    cat: Cat;
 
     protected levelObjects: LevelObject[] = [
         new LevelObject('bedroom', 0, 0, false),
@@ -39,8 +42,10 @@ export default class TestScene extends TempTextZoneScene {
         this.input.on('pointerdown', (evt) => {
             this.ajouterTexte(this, `Debugger`, `x : ${evt.position.x} ; y : ${evt.position.y}`, 80);
         })
+        this.cat = new Cat(this, 0,0);
     }
 
     update(time: number, delta: number): void {
+        this.cat.updateCat();
     }
 };
