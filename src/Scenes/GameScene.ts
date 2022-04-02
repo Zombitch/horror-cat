@@ -36,11 +36,12 @@ export default class GameScene extends TextZoneScene {
     create():void {
         super.create();
         this.levelObjects.forEach(obj => {
-            const img = this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0);
+            const img = this.physics.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0);
             img.setDepth(obj.depth);
             obj.objectRef = img;
             if(obj.hasCollider){
                 this.obstacles.push(img);
+                img.setImmovable(true)
             }
         });
 
