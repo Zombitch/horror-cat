@@ -17,6 +17,7 @@ export default class GameSceneTest extends Phaser.Scene {
         // load images
         this.load.image('logo', '../assets/img.png');
         this.load.image('cat', 'assets/cat.png');
+        this.load.spritesheet('cat_sprites', 'assets/cat_sprites',  { frameWidth: 48, frameHeight: 48 });
 
     }
 
