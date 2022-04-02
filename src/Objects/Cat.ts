@@ -8,7 +8,8 @@ export class Cat extends Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.getBody().setCollideWorldBounds(true);
-        this.getBody().setSize(48, 48);
+        this.getBody().setSize(48, 24).setOffset(0, 24);
+        this.setDepth(3);
 
         this.anims.create({
             key:"left",

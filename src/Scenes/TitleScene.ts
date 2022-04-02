@@ -31,10 +31,10 @@ export default class TitleScene extends Phaser.Scene {
 
     create(): void {
         // création des boutons
-        this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Test');
+        this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Bedroom');
         this.optionsButton = new Button(this, config.width/2, config.height/2, 'blueButton1', 'blueButton2', 'Options', 'Options');
         this.creditsButton = new Button(this, config.width/2, config.height/2 + 100, 'blueButton1', 'blueButton2', 'Credits', 'Credits');
-        this.add.text(300, 100, 'Il est où ce con de chat')
+        this.add.text(275, 100, 'Il est où ce con de chat', { fontSize: "48px" })
 
         // si la musique est On et qu'elle n'est pas déjà jouée, on la déclenche
         if (this.model.musicOn && !this.model.bgMusicPlaying) {
@@ -45,7 +45,7 @@ export default class TitleScene extends Phaser.Scene {
         }
 
         this.input.keyboard.on('keydown-A', () => {
-            this.scene.run("Test");
+            this.scene.run("Bedroom");
             this.scene.stop();
         })
 
