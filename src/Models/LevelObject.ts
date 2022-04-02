@@ -1,4 +1,11 @@
 export default class LevelObject {
+    private _identifier: string;
+    public get identifier(): string {
+        return this._identifier;
+    }
+    public set identifier(value: string) {
+        this._identifier = value;
+    }
     private _name: string;
     public get name(): string {
         return this._name;
@@ -31,10 +38,23 @@ export default class LevelObject {
         this._hasCollider = value;
     }
 
-    constructor(name, x, y, hasCollider){
+    private _objectRef: Phaser.GameObjects.GameObject;
+    public get objectRef(): Phaser.GameObjects.GameObject {
+        return this._objectRef;
+    }
+    public set objectRef(value: Phaser.GameObjects.GameObject) {
+        this._objectRef = value;
+    }
+
+    constructor(identifier, name, x, y, hasCollider){
+        this.identifier = identifier;
         this.name = name;
         this.x = x;
         this.y = y;
         this.hasCollider = hasCollider;
+    }
+
+    static find(identifier: string, objList: LevelObject[]): LevelObject{
+        return objList.find(obj => obj.identifier === identifier);
     }
 }

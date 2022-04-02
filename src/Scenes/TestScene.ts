@@ -14,13 +14,13 @@ export default class TestScene extends TempTextZoneScene {
     exit;
 
     protected levelObjects: LevelObject[] = [
-        new LevelObject('bedroom', 0, 0, false),
-        new LevelObject('bedroom-dresser', 990, 313, true),
-        new LevelObject('bedroom-dresser', 840, 313, true),
-        new LevelObject('bedroom-table', 836, 562, true),
-        new LevelObject('bedroom-table', 935, 562, true),
-        new LevelObject('bed', 982, 473, false),
-        new LevelObject('bed', 735, 473, false),
+        new LevelObject('bedroom', 'bedroom', 0, 0, false),
+        new LevelObject('bedroomDresser_A', 'bedroom-dresser', 990, 313, true),
+        new LevelObject('bedroomDresser_B', 'bedroom-dresser', 840, 313, true),
+        new LevelObject('bedroomTable_A', 'bedroom-table', 836, 562, true),
+        new LevelObject('bedroomTable_B', 'bedroom-table', 935, 562, true),
+        new LevelObject('bed_A', 'bed', 982, 473, false),
+        new LevelObject('bed_B', 'bed', 735, 473, false),
     ]
 
     constructor () {
@@ -42,7 +42,8 @@ export default class TestScene extends TempTextZoneScene {
 
     create():void {
         this.levelObjects.forEach(obj => {
-            const img = this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0)
+            const img = this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0);
+            obj.objectRef = img;
             if(obj.hasCollider){
                 this.obstacles.push(img);
             }else if(img.x && img.y) {
