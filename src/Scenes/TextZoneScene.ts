@@ -79,15 +79,6 @@ export default class TextZoneScene extends Phaser.Scene {
 
                 const icon = this.getElement('action').setVisible(true);
                 this.resetChildVisibleState(icon);
-                icon.y -= 30;
-                const tween = this.tweens.add({
-                    targets: icon,
-                    y: '+=30', // '+=100'
-                    ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                    duration: 500,
-                    repeat: 0, // -1: infinity
-                    yoyo: false
-                });
             }, textBox);
 
         textBox.on('complete', function() {
