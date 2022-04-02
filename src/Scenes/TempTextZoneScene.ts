@@ -44,7 +44,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
             wrapWidth: config.width - (this.textZoneSpacement.left + this.textZoneSpacement.right + widthReduceFactor),
             fixedWidth: config.width - (this.textZoneSpacement.left + this.textZoneSpacement.right + widthReduceFactor),
             fixedHeight: hauteur-(this.textZoneSpacement.top + this.textZoneSpacement.bottom + this.textZoneSpacement.text),
-        }).start(dialogue, 0);
+        }).start(dialogue, 50);
     }
 
     createTextBox(scene, x, y, nom: string, config) {
