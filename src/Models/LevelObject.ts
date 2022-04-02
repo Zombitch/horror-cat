@@ -1,4 +1,12 @@
 export default class LevelObject {
+    private _depth: number;
+    public get depth(): number {
+        return this._depth;
+    }
+    public set depth(value: number) {
+        this._depth = value;
+    }
+
     private _identifier: string;
     public get identifier(): string {
         return this._identifier;
@@ -46,12 +54,13 @@ export default class LevelObject {
         this._objectRef = value;
     }
 
-    constructor(identifier, name, x, y, hasCollider){
+    constructor(identifier, name, x, y, hasCollider, depth= 5){
         this.identifier = identifier;
         this.name = name;
         this.x = x;
         this.y = y;
         this.hasCollider = hasCollider;
+        this.depth = depth;
     }
 
     static find(identifier: string, objList: LevelObject[]): LevelObject{
