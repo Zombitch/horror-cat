@@ -9,6 +9,7 @@ import {Cat} from "../Objects/Cat";
 export default class TestScene extends TempTextZoneScene {
 
     cat: Cat;
+    obstacles = [];
 
     protected levelObjects: LevelObject[] = [
         new LevelObject('bedroom', 0, 0, false),
@@ -37,12 +38,20 @@ export default class TestScene extends TempTextZoneScene {
     }
 
     create():void {
-        this.levelObjects.forEach(obj => this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0));
-        
+        this.levelObjects.forEach(obj => {
+            const img = this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0)
+            if(obj.hasCollider){
+                this.obstacles.push(img);
+            }
+        });
+        this.physics.add.staticGroup(this.obstacles);
+
+
         this.input.on('pointerdown', (evt) => {
             this.ajouterTexte(this, `Debugger`, `x : ${evt.position.x} ; y : ${evt.position.y}`, 80);
         })
         this.cat = new Cat(this, 0,0);
+        this.physics.add.collider(this.cat, this.obstacles);
     }
 
     update(time: number, delta: number): void {
