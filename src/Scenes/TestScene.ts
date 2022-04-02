@@ -21,6 +21,8 @@ export default class TestScene extends TempTextZoneScene {
         new LevelObject('bedroomTable_B', 'bedroom-table', 935, 562, true),
         new LevelObject('bed_A', 'bed', 982, 473, false),
         new LevelObject('bed_B', 'bed', 735, 473, false),
+        new LevelObject('armoire_A', 'armoire', 420, 70, true),
+        new LevelObject('armoire_B', 'armoire', 420, 170, true),
     ]
 
     constructor () {

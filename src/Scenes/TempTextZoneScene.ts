@@ -31,6 +31,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
             url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
             sceneKey: 'rexUI'
         });
+        this.load.image('nextPage', 'assets/arrow-down-left.png');
     }
 
     create():void {

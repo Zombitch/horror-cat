@@ -11,6 +11,7 @@ export class Cat extends Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         this.getBody().setCollideWorldBounds(true);
         this.getBody().setSize(48, 48);
+        this.setDepth(3);
 
         this.anims.create({
             key:"left",
