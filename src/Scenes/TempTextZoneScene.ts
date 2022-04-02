@@ -34,7 +34,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
     }
 
     create():void {
-        this.name = this.add.text(30, 0, "").setVisible(false);
+        this.name = this.add.text(30, 0, "azeazeqdfsdfqsfqsefezfzefsdfsfsqfqdfsqfgsgsqgsqg").setVisible(false);
     }
 
     ajouterTexte(scene: Scene, dialogue: string, nom: string, hauteur: number) {
@@ -59,11 +59,11 @@ export default class TempTextZoneScene extends Phaser.Scene {
             action: scene.add.image(0, 0, 'nextPage').setTint(this.COLOR_LIGHT).setVisible(false),
             space: this.textZoneSpacement
         }).setOrigin(0).layout();
-
+        
         textBox.setInteractive()
             .on('type', () => {
                 this.name.setY(y+2).setVisible(true).setDepth(10).setText(nom);
-            }, textBox)
+            })
             .on('pointerdown', function () {
                 const icon = this.getElement('action').setVisible(false);
                 this.resetChildVisibleState(icon);
