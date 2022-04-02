@@ -36,7 +36,7 @@ export default class GameScene extends TextZoneScene {
     create():void {
         super.create();
         this.levelObjects.forEach(obj => {
-            const img = this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0);
+            const img = this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0).setPipeline('Light2D');
             img.setDepth(1);
             obj.objectRef = img;
             if(obj.hasCollider){

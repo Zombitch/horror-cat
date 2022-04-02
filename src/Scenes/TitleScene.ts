@@ -34,7 +34,7 @@ export default class TitleScene extends Phaser.Scene {
         this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Test');
         this.optionsButton = new Button(this, config.width/2, config.height/2, 'blueButton1', 'blueButton2', 'Options', 'Options');
         this.creditsButton = new Button(this, config.width/2, config.height/2 + 100, 'blueButton1', 'blueButton2', 'Credits', 'Credits');
-        this.add.text(300, 100, 'Il est où ce con de chat')
+        this.add.text(500, 100, 'Il est où ce con de chat')
 
         // si la musique est On et qu'elle n'est pas déjà jouée, on la déclenche
         if (this.model.musicOn && !this.model.bgMusicPlaying) {

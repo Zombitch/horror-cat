@@ -67,7 +67,7 @@ export class Cat extends Physics.Arcade.Sprite {
         }
     }
 
-    protected getBody(): Physics.Arcade.Body {
+    public getBody(): Physics.Arcade.Body {
         return this.body as Physics.Arcade.Body;
     }
 }
