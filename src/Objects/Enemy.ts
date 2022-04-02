@@ -8,6 +8,7 @@ export class Enemy extends Physics.Arcade.Sprite {
 
     constructor(scene : Scene, x, y, dir : string){
         super(scene, x, y, 'baddy');
+        this.scene = scene;
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setCircle(50);
@@ -26,8 +27,8 @@ export class Enemy extends Physics.Arcade.Sprite {
         }
     }
 
-    catSeen(){
-        console.log("seen");
+    catSeen(currentScene){
+        currentScene.start('GameOver')
     }
 
 
