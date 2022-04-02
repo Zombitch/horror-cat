@@ -6,8 +6,8 @@ import {Scene} from "phaser";
 export default class Button extends Phaser.GameObjects.Container {
 
     scene: Scene;
-    button: Sprite
-    text: Text
+    button: Sprite;
+    text: Text;
     x: number;
     y: number;
 

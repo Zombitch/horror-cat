@@ -1,4 +1,5 @@
 import 'phaser';
+import config from "../config";
 
 /**
  * Scène du jeu

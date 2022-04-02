@@ -11,8 +11,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "phaser": "^3.55.2",
     "ts-loader": "^9.2.8",
