@@ -22,8 +22,12 @@ export default class BedroomScene extends GameScene {
             new LevelObject('bedroomTable_B', 'bedroom-table', 935, 562, true),
             new LevelObject('bed_A', 'bed', 982, 473, false),
             new LevelObject('bed_B', 'bed', 735, 473, false),
-            new LevelObject('armoire_A', 'armoire', 420, 70, true),
-            new LevelObject('armoire_B', 'armoire', 420, 170, true),
+            new LevelObject('double_carton', 'double_carton', 250, 570, true),
+            new LevelObject('carton_A', 'carton', 200, 400, true),
+            new LevelObject('carton_B', 'carton', 400, 490, true),
+            new LevelObject('tv', 'tv', 500, 50, true),
+            new LevelObject('tapis', 'tapis', 465, 200, false),
+            new LevelObject('chair_A', 'chair', 250, 80, true),
         ]
     }
     
