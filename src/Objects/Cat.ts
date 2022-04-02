@@ -3,8 +3,6 @@ import {Physics, Scene} from "phaser";
 import config from "../config";
 
 export class Cat extends Physics.Arcade.Sprite {
-    scene: Scene;
-
     constructor(scene: Phaser.Scene, x: number, y: number){
         super(scene, x, y, 'cat_sprites', 34); //key is texture
         scene.add.existing(this);
