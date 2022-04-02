@@ -31,14 +31,13 @@ export default class TempTextZoneScene extends Phaser.Scene {
     }
 
     create():void {
-        // ajout de l'image à la scène
-        const content = 'miaou miaou miaou miaou miaou miaou miaou miaoumiaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou';
+
     }
 
     ajouterTexte(scene: Scene, dialogue: string, nom: string, hauteur: number) {
         this.createTextBox(scene, 10, config.height - hauteur + 5 , nom, {
-            wrapWidth: config.width -20 ,
-            fixedWidth: config.width - 20 - nom.length * 27.5,
+            wrapWidth: config.width -20 - nom.length * 30.5,
+            fixedWidth: config.width - 20 - nom.length * 50,
             fixedHeight: hauteur - 50,
         }).start(dialogue, 50);
 
@@ -101,7 +100,6 @@ export default class TempTextZoneScene extends Phaser.Scene {
         textBox.on('complete', function() {
            //setTimeout(() => {textBox.destroy()}, 5000)
         }, scene);
-        console.log(textBox.width)
         return textBox;
     }
 
