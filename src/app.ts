@@ -28,7 +28,7 @@ class Jeu extends Phaser.Game {
         this.scene.add('Title', TitleScene);
         this.scene.add('Options', OptionsScene);
         this.scene.add('Credits', CreditScene);
-        this.scene.start('Test');
+        this.scene.start('Boot');
 
     }
 }

@@ -32,6 +32,6 @@ export default class TestScene extends TempTextZoneScene {
     create():void {
         this.levelObjects.forEach(obj => this.add.image(0, 0, obj.name).setOrigin(0, 0));
 
-        this.ajouterTexte(this, 'fucking pos', 'asshole', 80);
+        this.ajouterTexte(this, 'fucking pos', 'oui', 80);
     }
 };

@@ -33,21 +33,23 @@ export default class TempTextZoneScene extends Phaser.Scene {
     create():void {
         // ajout de l'image à la scène
         const content = 'miaou miaou miaou miaou miaou miaou miaou miaoumiaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou miaou';
-        //this.ajouterTexte(this, content, 'boule de neige', config.height * 0.1)
     }
 
     ajouterTexte(scene: Scene, dialogue: string, nom: string, hauteur: number) {
-        this.createTextBox(scene, 10, config.height - (hauteur + hauteur * 0.6 ) , nom, {
-            wrapWidth: config.width,
-            fixedWidth: config.width - 400,
-            fixedHeight: hauteur,
+        this.createTextBox(scene, 10, config.height - hauteur + 5 , nom, {
+            wrapWidth: config.width -20 ,
+            fixedWidth: config.width - 20 - nom.length * 27.5,
+            fixedHeight: hauteur - 50,
         }).start(dialogue, 50);
+
     }
 
     createTextBox(scene, x, y, nom: string, config) {
         const wrapWidth = GetValue(config, 'wrapWidth', 0);
         const fixedWidth = GetValue(config, 'fixedWidth', 0);
         const fixedHeight = GetValue(config, 'fixedHeight', 0);
+        console.log(wrapWidth)
+        console.log(fixedWidth)
         const textBox = scene.rexUI.add.textBox({
             x: x,
             y: y,
@@ -68,10 +70,6 @@ export default class TempTextZoneScene extends Phaser.Scene {
 
         textBox
             .setInteractive()
-            .on('type', () => {
-                const who = scene.add.text(config.width - 150, textBox.y, nom);
-                who.setDepth(1000000)
-            }, textBox)
             .on('pointerdown', function () {
                 const icon = this.getElement('action').setVisible(false);
                 this.resetChildVisibleState(icon);
@@ -103,6 +101,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
         textBox.on('complete', function() {
            //setTimeout(() => {textBox.destroy()}, 5000)
         }, scene);
+        console.log(textBox.width)
         return textBox;
     }
 
@@ -113,7 +112,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
             wordWrap: {
                 width: wrapWidth
             },
-            maxLines: 3
+            maxLines: 2
         })
             .setFixedSize(fixedWidth, fixedHeight);
     }
@@ -127,7 +126,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
                 mode: 'word',
                 width: wrapWidth
             },
-            maxLines: 3
+            maxLines: 2
         })
     }
 
