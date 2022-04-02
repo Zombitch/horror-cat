@@ -1,6 +1,5 @@
 import 'phaser';
 import config from "../config";
-import Zone = Phaser.GameObjects.Zone;
 import Text = Phaser.GameObjects.Text;
 import GetValue = Phaser.Utils.Objects.GetValue;
 import {Scene} from "phaser";
@@ -10,19 +9,23 @@ import {Scene} from "phaser";
  */
 export default class TempTextZoneScene extends Phaser.Scene {
 
-
-    zoneTexte: Zone;
-    dialogue: Text;
-    COLOR_PRIMARY = 0x4e342e;
-    COLOR_LIGHT = 0x7b5e57;
-    COLOR_DARK = 0x260e04;
-
+    private name: Text;
+    private COLOR_PRIMARY = 0x4e342e;
+    private COLOR_LIGHT = 0x7b5e57;
+    private textZoneSpacement = {
+        left: 20,
+        right: 20,
+        top: 20,
+        bottom: 20,
+        icon: 10,
+        text: 10,
+    }
 
     constructor (sceneName) {
         super(sceneName);
     }
+
     preload() {
-        console.log('bbb')
         this.load.scenePlugin({
             key: 'rexuiplugin',
             url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
@@ -31,44 +34,36 @@ export default class TempTextZoneScene extends Phaser.Scene {
     }
 
     create():void {
-
+        this.name = this.add.text(30, 0, "").setVisible(false);
     }
 
     ajouterTexte(scene: Scene, dialogue: string, nom: string, hauteur: number) {
-        this.createTextBox(scene, 10, config.height - hauteur + 5 , nom, {
-            wrapWidth: config.width -20 - nom.length * 30.5,
-            fixedWidth: config.width - 20 - nom.length * 50,
-            fixedHeight: hauteur - 50,
-        }).start(dialogue, 50);
-
+        const widthReduceFactor = 65;
+        this.createTextBox(scene, 10, config.height-hauteur+5 , nom, {
+            wrapWidth: config.width - (this.textZoneSpacement.left + this.textZoneSpacement.right + widthReduceFactor),
+            fixedWidth: config.width - (this.textZoneSpacement.left + this.textZoneSpacement.right + widthReduceFactor),
+            fixedHeight: hauteur-(this.textZoneSpacement.top + this.textZoneSpacement.bottom + this.textZoneSpacement.text),
+        }).start(dialogue, 0);
     }
 
     createTextBox(scene, x, y, nom: string, config) {
         const wrapWidth = GetValue(config, 'wrapWidth', 0);
         const fixedWidth = GetValue(config, 'fixedWidth', 0);
         const fixedHeight = GetValue(config, 'fixedHeight', 0);
-        console.log(wrapWidth)
-        console.log(fixedWidth)
+        
         const textBox = scene.rexUI.add.textBox({
             x: x,
             y: y,
-            background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, this.COLOR_PRIMARY)
-                .setStrokeStyle(2, this.COLOR_LIGHT),
-            icon: scene.add.text(x, y, nom, {fontSize:'24px'}),
-            text: this.getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
+            background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, this.COLOR_PRIMARY).setStrokeStyle(2, this.COLOR_LIGHT),
+            text: this.getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight*1.25),
             action: scene.add.image(0, 0, 'nextPage').setTint(this.COLOR_LIGHT).setVisible(false),
-            space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-                icon: 10,
-                text: 10,
-            }
+            space: this.textZoneSpacement
         }).setOrigin(0).layout();
 
-        textBox
-            .setInteractive()
+        textBox.setInteractive()
+            .on('type', () => {
+                this.name.setY(y+2).setVisible(true).setDepth(10).setText(nom);
+            }, textBox)
             .on('pointerdown', function () {
                 const icon = this.getElement('action').setVisible(false);
                 this.resetChildVisibleState(icon);
@@ -79,9 +74,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
                 }
             }, textBox)
             .on('pageend', function () {
-                if (this.isLastPage) {
-                    return;
-                }
+                if(this.isLastPage)  return;
 
                 const icon = this.getElement('action').setVisible(true);
                 this.resetChildVisibleState(icon);
@@ -94,15 +87,17 @@ export default class TempTextZoneScene extends Phaser.Scene {
                     repeat: 0, // -1: infinity
                     yoyo: false
                 });
-            }, textBox)
-        //.on('type', function () {
-        //})
+            }, textBox);
+
         textBox.on('complete', function() {
-           setTimeout(() => {textBox.destroy()}, 5000)
-        }, scene);
+           setTimeout(() => {
+               this.name.setVisible(false);
+               textBox.destroy();
+            }, 10*1000);
+        }, this);
+
         return textBox;
     }
-
 
     getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight) {
         return scene.add.text(0, 0, '', {
@@ -110,9 +105,9 @@ export default class TempTextZoneScene extends Phaser.Scene {
             wordWrap: {
                 width: wrapWidth
             },
-            maxLines: 2
+            maxLines: 3
         })
-            .setFixedSize(fixedWidth, fixedHeight);
+        .setFixedSize(fixedWidth, fixedHeight);
     }
 
     getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight) {
@@ -124,7 +119,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
                 mode: 'word',
                 width: wrapWidth
             },
-            maxLines: 2
+            maxLines: 3
         })
     }
 
