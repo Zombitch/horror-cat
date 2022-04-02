@@ -9,8 +9,12 @@ export default class TestScene extends TempTextZoneScene {
 
     protected levelObjects: LevelObject[] = [
         new LevelObject('bedroom', 0, 0, false),
-        new LevelObject('bedroom-dresser', 0, 0, true),
-        new LevelObject('bed', 0, 0, false),
+        new LevelObject('bedroom-dresser', 990, 313, true),
+        new LevelObject('bedroom-dresser', 840, 313, true),
+        new LevelObject('bedroom-table', 836, 562, true),
+        new LevelObject('bedroom-table', 935, 562, true),
+        new LevelObject('bed', 982, 473, false),
+        new LevelObject('bed', 735, 473, false),
     ]
 
     constructor () {
@@ -30,8 +34,13 @@ export default class TestScene extends TempTextZoneScene {
     }
 
     create():void {
-        this.levelObjects.forEach(obj => this.add.image(0, 0, obj.name).setOrigin(0, 0));
+        this.levelObjects.forEach(obj => this.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0));
+        
+        this.input.on('pointerdown', (evt) => {
+            this.ajouterTexte(this, `Debugger`, `x : ${evt.position.x} ; y : ${evt.position.y}`, 80);
+        })
+    }
 
-        this.ajouterTexte(this, 'fucking pos', 'asshole', 80);
+    update(time: number, delta: number): void {
     }
 };

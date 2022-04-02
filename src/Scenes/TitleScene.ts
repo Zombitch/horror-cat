@@ -44,8 +44,14 @@ export default class TitleScene extends Phaser.Scene {
             this.model.bgMusic = this.bgMusic;
         }
 
+        this.input.keyboard.on('keydown-A', () => {
+            this.scene.run("Test");
+            this.scene.stop();
+        })
+
+        this.input.keyboard.on('keydown-Z', () => {
+            this.scene.run("GameTest");
+            this.scene.stop();
+        })
     }
-
-
-
 };
