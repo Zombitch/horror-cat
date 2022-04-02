@@ -8,29 +8,27 @@ export class Cat extends Physics.Arcade.Sprite {
     constructor(scene: Phaser.Scene, x: number, y: number){
         super(scene, x, y, 'cat'); //key is texture
         console.log(scene);
-        //scene.add.existing(this);
-        //scene.physics.add.existing(this);
-        //this.getBody().setCollideWorldBounds(true);
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.getBody().setCollideWorldBounds(true);
         this.getBody().setSize(337, 88);
 
     }
 
     updateCat(): void {
-        // this.getBody().setVelocity(0);
-        // if (this.scene.input.keyboard.addKey('UP')) {
-        //     this.body.velocity.y = -110;
-        // }
-        // if (this.scene.input.keyboard.addKey('LEFT')) {
-        //     this.body.velocity.x = -110;
-        //     this.getBody().setOffset(48, 15);
-        // }
-        // if (this.scene.input.keyboard.addKey('DOWN')) {
-        //     this.body.velocity.y = 110;
-        // }
-        // if (this.scene.input.keyboard.addKey('RIGHT')) {
-        //     this.body.velocity.x = 110;
-        //     this.getBody().setOffset(15, 15);
-        // }
+        this.getBody().setVelocity(0);
+        if (this.scene.input.keyboard.addKey('UP').isDown) {
+            this.body.velocity.y = -210;
+        }
+        if (this.scene.input.keyboard.addKey('LEFT').isDown) {
+            this.body.velocity.x = -210;
+        }
+        if (this.scene.input.keyboard.addKey('DOWN').isDown) {
+            this.body.velocity.y = 210;
+        }
+        if (this.scene.input.keyboard.addKey('RIGHT').isDown) {
+            this.body.velocity.x = 210;
+        }
     }
 
     protected getBody(): Physics.Arcade.Body {

@@ -16,17 +16,18 @@ export default class GameSceneTest extends Phaser.Scene {
     preload(): void {
         // load images
         this.load.image('logo', '../assets/img.png');
+        this.load.image('cat', 'assets/cat.png');
 
     }
 
     create():void {
         // ajout de l'image à la scène
-        this.add.image(400, 300, 'logo');
+        //this.add.image(400, 300, 'logo');
         this.cat = new Cat(this, 400, 300);
     }
 
     update():void {
-        //this.cat.updateCat();
+        this.cat.updateCat();
     }
 
 
