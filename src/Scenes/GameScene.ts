@@ -45,7 +45,7 @@ export default class GameScene extends TextZoneScene {
         });
 
         // mur haut
-        this.obstacles.push(this.add.rectangle(0,0, config.width, 100).setOrigin(0));
+        this.obstacles.push(this.add.rectangle(0,0, config.width, 124).setOrigin(0));
         // mur bas
         this.obstacles.push(this.add.rectangle(0,config.height - 150, 180, 100).setOrigin(0));
         this.obstacles.push(this.add.rectangle(260,config.height - 150, config.width, 100).setOrigin(0));
