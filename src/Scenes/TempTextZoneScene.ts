@@ -101,7 +101,7 @@ export default class TempTextZoneScene extends Phaser.Scene {
         //.on('type', function () {
         //})
         textBox.on('complete', function() {
-           //setTimeout(() => {textBox.destroy()}, 5000)
+           setTimeout(() => {textBox.destroy()}, 5000)
         }, scene);
         return textBox;
     }
