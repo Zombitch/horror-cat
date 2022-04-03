@@ -29,7 +29,7 @@ export default class BedroomScene extends GameScene {
             new LevelObject('tv', 'tv', 500, 50, true),
             new LevelObject('tapis', 'tapis', 465, 200, false, 2),
             new LevelObject('chair_A', 'chair', 250, 80, true),
-        ]
+        ];
     }
     
     preload(): void {
@@ -47,6 +47,6 @@ export default class BedroomScene extends GameScene {
     }
 
     update(time: number, delta: number): void {
-        this.cat.updateCat();        
+        this.cat.updateCat();
     }
 };

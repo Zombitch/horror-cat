@@ -14,6 +14,9 @@ export default class GameScene extends TextZoneScene {
     protected obstacles: GameObjects.GameObject[] = [];
     protected exitRectangle;
 
+    protected ambiantLight: number = 0xFFFFFF;
+    protected playerSpotlight: GameObjects.Light;
+
     protected levelObjects: LevelObject[]
 
     constructor(sceneName) {
@@ -38,7 +41,7 @@ export default class GameScene extends TextZoneScene {
     create():void {
         super.create();
         this.levelObjects.forEach(obj => {
-            const img = this.physics.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0);
+            const img = this.physics.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0).setPipeline('Light2D');
             img.setDepth(obj.depth);
             obj.objectRef = img;
             if(obj.hasCollider){
@@ -65,5 +68,15 @@ export default class GameScene extends TextZoneScene {
         this.physics.add.staticGroup(this.exitRectangle);
         this.physics.add.collider(this.cat, this.obstacles);
         this.physics.add.collider(this.cat, this.exitRectangle, () => {console.log('exit')})
+
+
+        this.lights.enable();
+        this.lights.setAmbientColor(this.ambiantLight);
+        this.playerSpotlight = this.lights.addLight(-10, -10, 280).setIntensity(2);
+    }
+
+    updatePlayerSpotlight(): void{
+        this.playerSpotlight.x = this.cat.body.position.x;
+        this.playerSpotlight.y = this.cat.body.position.y;
     }
 };
