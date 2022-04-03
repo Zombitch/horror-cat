@@ -87,7 +87,9 @@ export default class GameScene extends TextZoneScene {
             });
             
         });
-        this.physics.add.collider(this.obstacles, this.enemies);
+        this.physics.add.collider(this.obstacles, this.enemies, (obj1, obj2) => {
+            this.enemies.forEach(en => en.speed=100)
+        });
 
         this.lights.enable();
         this.lights.setAmbientColor(this.ambiantLight);
@@ -106,9 +108,7 @@ export default class GameScene extends TextZoneScene {
     }
 
     checkHiding(){
-        this.cachettes.forEach(hiding => {
-            this.cat.isHidden = Phaser.Geom.Intersects.RectangleToRectangle(hiding.getBounds(), this.cat.getBounds());
-        })
+        this.cat.isHidden = this.cachettes.some(hiding => Phaser.Geom.Intersects.RectangleToRectangle(hiding.getBounds(), this.cat.getBounds()) == true)
     }
 
     createExit(x: number, y: number, scene: string, sceneParams:{} = {}):void {
