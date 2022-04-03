@@ -3,6 +3,17 @@ import {Physics, Scene} from "phaser";
 import config from "../config";
 
 export default class Cat extends Physics.Arcade.Sprite {
+
+    _isHidden: boolean;
+
+    get isHidden(): boolean{
+        return this._isHidden
+    }
+    set isHidden(hidden: boolean) {
+        this._isHidden = hidden
+    }
+
+
     constructor(scene: Phaser.Scene, x: number, y: number){
         super(scene, x, y, 'cat_sprites', 34); //key is texture
         scene.add.existing(this);
@@ -10,7 +21,7 @@ export default class Cat extends Physics.Arcade.Sprite {
         this.getBody().setCollideWorldBounds(true);
         this.getBody().setSize(48, 24).setOffset(0, 24);
         this.setDepth(3);
-
+        this.isHidden = false;
         this.anims.create({
             key:"left",
             frames: this.anims.generateFrameNumbers('cat_sprites', { start: 21, end: 23 }),
@@ -63,6 +74,8 @@ export default class Cat extends Physics.Arcade.Sprite {
         if(this.getBody().velocity.x === 0 && this.getBody().velocity.y === 0 ){
             this.anims.stop();
         }
+
+        this.isHidden = false;
     }
 
     protected getBody(): Physics.Arcade.Body {
