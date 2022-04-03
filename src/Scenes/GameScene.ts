@@ -92,6 +92,6 @@ export default class GameScene extends TextZoneScene {
     }
 
     gameOver():void{        
-        this.scene.start('GameOver', {isGameOver: false})
+        this.scene.start('GameOver', {isGameOver: true});
     }
 };
