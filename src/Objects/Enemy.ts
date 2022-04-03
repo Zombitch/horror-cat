@@ -55,8 +55,6 @@ export class Enemy extends Physics.Arcade.Sprite {
             frameRate: 10,
             repeat: -1
         });
-
-        console.log(this);
     }
 
     updateEnemy(){

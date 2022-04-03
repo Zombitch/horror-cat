@@ -55,18 +55,22 @@ export default class Cat extends Physics.Arcade.Sprite {
     updateCat(): void {
         this.getBody().setVelocity(0);
         if (this.scene.input.keyboard.addKey('UP').isDown || this.scene.input.keyboard.addKey('Z').isDown) {
+            this.checkOverlap();
             this.body.velocity.y = -210;
             this.anims.play('up', true);
         }
         if (this.scene.input.keyboard.addKey('LEFT').isDown || this.scene.input.keyboard.addKey('Q').isDown) {
+            this.checkOverlap();
             this.body.velocity.x = -210;
             this.anims.play('left', true);
         }
         if (this.scene.input.keyboard.addKey('DOWN').isDown || this.scene.input.keyboard.addKey('S').isDown) {
+            this.checkOverlap();
             this.body.velocity.y = 210;
             this.anims.play('down', true);
         }
         if (this.scene.input.keyboard.addKey('RIGHT').isDown || this.scene.input.keyboard.addKey('D').isDown) {
+            this.checkOverlap();
             this.body.velocity.x = 210;
             this.anims.play('right', true);
         }
@@ -75,11 +79,14 @@ export default class Cat extends Physics.Arcade.Sprite {
             this.anims.stop();
         }
 
-        this.isHidden = false;
     }
 
     protected getBody(): Physics.Arcade.Body {
         return this.body as Physics.Arcade.Body;
+    }
+
+    checkOverlap() {
+        this.isHidden = !this.body.touching.none;
     }
 }
 
