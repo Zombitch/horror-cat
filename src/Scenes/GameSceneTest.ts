@@ -23,6 +23,7 @@ export default class GameSceneTest extends Phaser.Scene {
         this.load.spritesheet('cat_sprites', 'assets/cat_sprites',  { frameWidth: 48, frameHeight: 48 });
         this.load.image('baddy', 'assets/baddy.png');
         this.load.image('vision_cone', 'assets/vision_cone.png');
+        this.load.spritesheet('enemy_sprites', 'assets/enemy_sprites',  { frameWidth: 48, frameHeight: 72 });
 
     }
 
@@ -36,6 +37,7 @@ export default class GameSceneTest extends Phaser.Scene {
         this.enemy = new Enemy(this, 500, 300, "south");
         this.physics.add.overlap(this.cat, this.enemy, this.enemy.catSeen, null, this);
         this.physics.add.overlap(this.cat, this.enemy.vision, this.enemy.catSeen, null, this);
+        
     }
 
     update():void {

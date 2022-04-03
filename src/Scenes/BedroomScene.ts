@@ -47,6 +47,9 @@ export default class BedroomScene extends GameScene {
 
     update(time: number, delta: number): void {
         this.cat.updateCat();
+        this.enemies.forEach(enemy => { 
+            enemy.updateEnemy();
+        });
     }
 
     gameOver():void{
