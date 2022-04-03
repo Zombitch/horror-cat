@@ -1,16 +1,17 @@
 import 'phaser';
 import {Physics, Scene} from "phaser";
-import Vision from './Vision'
+import Vision from './Vision';
+import Cat from './Cat';
 
 export class Enemy extends Physics.Arcade.Sprite {
 
     vision : Vision;
     dir : string;
+    catSeen : boolean;
 
     constructor(scene : Scene, x, y, dir : string){
 
         let frameE : number = 58;
-
 
         if(dir == "north"){
             frameE = 94;
@@ -56,10 +57,6 @@ export class Enemy extends Physics.Arcade.Sprite {
         });
 
         console.log(this);
-    }
-
-    catSeen(currentScene){
-        
     }
 
     updateEnemy(){

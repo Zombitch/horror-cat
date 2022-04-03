@@ -1,5 +1,5 @@
 import 'phaser';
-import { Cat } from '../Objects/Cat'
+import Cat from '../Objects/Cat'
 import { Enemy } from '../Objects/Enemy'
 
 import config from "../config";
@@ -35,8 +35,8 @@ export default class GameSceneTest extends Phaser.Scene {
         this.enemy = new Enemy(this, 200, 200, "west");
         this.enemy = new Enemy(this, 1200, 200, "north");
         this.enemy = new Enemy(this, 500, 300, "south");
-        this.physics.add.overlap(this.cat, this.enemy, this.enemy.catSeen, null, this);
-        this.physics.add.overlap(this.cat, this.enemy.vision, this.enemy.catSeen, null, this);
+        //this.physics.add.overlap(this.cat, this.enemy, this.enemy.catSeen, null, this);
+        //this.physics.add.overlap(this.cat, this.enemy.vision, this.enemy.catSeen, null, this);
         
     }
 

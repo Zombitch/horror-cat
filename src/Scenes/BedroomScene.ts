@@ -1,7 +1,7 @@
 import 'phaser';
 import LevelObject from '../Objects/LevelObject';
 import TempTextZoneScene from './TextZoneScene'
-import {Cat} from "../Objects/Cat";
+import Cat from "../Objects/Cat";
 import config from "../config";
 import { GameObjects } from 'phaser';
 import GameScene from './GameScene';
@@ -49,7 +49,11 @@ export default class BedroomScene extends GameScene {
         this.cat.updateCat();
         this.enemies.forEach(enemy => { 
             enemy.updateEnemy();
+            if(enemy.catSeen){
+                this.physics.moveToObject(enemy, this.cat);
+            }
         });
+        
     }
 
     gameOver(enemy):void{
