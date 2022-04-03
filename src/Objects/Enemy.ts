@@ -57,7 +57,7 @@ export class Enemy extends Physics.Arcade.Sprite {
         });
     }
 
-    updateEnemy(){
+    updateEnemy(scene: Scene, cat: Cat){
         if(this.body.velocity.x > 0 && (Math.abs(this.body.velocity.x) > Math.abs(this.body.velocity.y ))){
             this.anims.play("right", true);
         } else if(this.body.velocity.x < 0  && (Math.abs(this.body.velocity.x) > Math.abs(this.body.velocity.y ))){
@@ -70,6 +70,11 @@ export class Enemy extends Physics.Arcade.Sprite {
 
         if(this.body.velocity.x === 0 && this.body.velocity.y === 0){
             this.anims.stop();
+        }
+        if(cat.isHidden){
+            this.setVelocity(0,0)
+        } else if(this.catSeen){
+            scene.physics.moveToObject(this, cat);
         }
     }
 }

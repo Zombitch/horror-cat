@@ -35,6 +35,8 @@ export default class CellarScene extends GameScene {
 
     create():void {
         // ajout des méchants avant le super create pour que les méthodes de follow / game over etc soient prises en compte dans la classe parente
+        this.enemies.push(new Enemy(this,690, 130, 'west'));
+        this.enemies.push(new Enemy(this,400, 300, 'east'));
         super.create();
         const miaous: string[] = ['...miaou...', 'Miaou !!', 'Miaou', 'Miaou...', 'Mew...'];
         LevelObject.find("cellar", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
@@ -49,6 +51,9 @@ export default class CellarScene extends GameScene {
     update(time: number, delta: number): void {
         this.cat.updateCat();
         this.updatePlayerSpotlight();
+        this.enemies.forEach(enemy => {
+            enemy.updateEnemy(this, this.cat);
+        });
     }
 
     gameOver():void{
