@@ -52,7 +52,7 @@ export default class BedroomScene extends GameScene {
         });
     }
 
-    gameOver():void{
-        this.scene.start('GameOver', {isGameOver: false});
+    gameOver(enemy):void{
+        this.scene.start('GameOver', {isGameOver: false, cat: this.cat, mechant: enemy});
     }
 };
