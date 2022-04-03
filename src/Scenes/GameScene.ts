@@ -36,6 +36,7 @@ export default class GameScene extends TextZoneScene {
             }
         });
         this.load.spritesheet('cat_sprites', 'assets/cat_sprites',  { frameWidth: 48, frameHeight: 48 });
+        this.load.spritesheet('enemy_sprites', 'assets/enemy_sprites',  { frameWidth: 48, frameHeight: 72 });
         this.load.image('baddy', 'assets/baddy.png');
         this.load.image('vision_cone', 'assets/vision_cone.png');
     }
