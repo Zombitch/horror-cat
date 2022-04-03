@@ -12,6 +12,8 @@ import {Enemy} from "../Objects/Enemy";
  */
 export default class BedroomScene extends GameScene {
 
+    mechant: Enemy;
+
     constructor () {
         super('Bedroom');
 
@@ -37,13 +39,10 @@ export default class BedroomScene extends GameScene {
     }
 
     create():void {
+        // ajout des méchants avant le super create pour que les méthodes de follow / game over etc soient prises en compte dans la classe parente
+        this.enemies.push(new Enemy(this, 580,400, 'north'));
         super.create();
-        const mechant = new Enemy(this, 580,400, 'north');
-        mechant.setDepth(10);
-        mechant.vision.setDepth(10);
         LevelObject.find("bedroom", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
-        this.physics.add.overlap(this.cat, mechant, () => mechant.catSeen(this.scene));
-        this.physics.add.overlap(this.cat, mechant.vision, () => mechant.catSeen(this.scene));
     }
 
     update(time: number, delta: number): void {
