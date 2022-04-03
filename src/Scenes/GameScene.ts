@@ -83,14 +83,19 @@ export default class GameScene extends TextZoneScene {
             this.physics.add.overlap(this.cat, enemy.vision, () => {
                 enemy.catSeen = true;
                 enemy.vision.destroy();
+                this.time.removeAllEvents();
             });
             
         });
-        this.physics.add.collider(this.obstacles, this.enemies);
+        this.physics.add.collider(this.obstacles, this.enemies, (obj1, obj2) => {
+            this.enemies.forEach(en => en.speed=100)
+        });
 
         this.lights.enable();
         this.lights.setAmbientColor(this.ambiantLight);
-        this.playerSpotlight = this.lights.addLight(-100, -100, 120).setIntensity(2);
+
+        if(this.ambiantLight == 0xFFFFFF) this.playerSpotlight = this.lights.addLight(-100, -100, 280).setIntensity(2);
+        else this.playerSpotlight = this.lights.addLight(-100, -100, 120).setIntensity(2);
     }
 
     gameOver(enemy: Enemy):void{
@@ -103,9 +108,7 @@ export default class GameScene extends TextZoneScene {
     }
 
     checkHiding(){
-        this.cachettes.forEach(hiding => {
-            this.cat.isHidden = Phaser.Geom.Intersects.RectangleToRectangle(hiding.getBounds(), this.cat.getBounds());
-        })
+        this.cat.isHidden = this.cachettes.some(hiding => Phaser.Geom.Intersects.RectangleToRectangle(hiding.getBounds(), this.cat.getBounds()) == true)
     }
 
     createExit(x: number, y: number, scene: string, sceneParams:{} = {}):void {

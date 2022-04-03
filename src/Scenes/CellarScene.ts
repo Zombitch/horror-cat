@@ -33,7 +33,7 @@ export default class CellarScene extends GameScene {
 
     create():void {
         // ajout des méchants avant le super create pour que les méthodes de follow / game over etc soient prises en compte dans la classe parente
-        this.enemies.push(new Enemy(this,690, 130, 'left'));
+        this.enemies.push(new Enemy(this,750, 130, 'left'));
         this.enemies.push(new Enemy(this,400, 300, 'right'));
         super.create();
         const miaous: string[] = ['...miaou...', 'Miaou !!', 'Miaou', 'Miaou...', 'Mew...'];
@@ -45,6 +45,14 @@ export default class CellarScene extends GameScene {
             this.ajouterTexte(miaous[Math.floor(Math.random() * ((miaous.length-1) - 0 +1)) + 0], 'Nestor le chat', 80, 3);
         }, 10*1000);
         
+        this.enemies.forEach(enemy =>
+            {this.time.addEvent({
+                delay: 2000,
+                callback: ()=>enemy.turnEnemy(),
+                loop: true,
+            });
+        })
+
         this.createExit(622, 122, 'Kitchen', {isGameOver:false, isWin: true});
     }
 
