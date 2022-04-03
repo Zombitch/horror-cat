@@ -1,7 +1,7 @@
 import 'phaser';
 import { GameObjects } from 'phaser';
 import LevelObject from '../Objects/LevelObject';
-import { Cat } from '../Objects/Cat';
+import Cat  from '../Objects/Cat';
 import TextZoneScene from './TextZoneScene';
 import config from "../config";
 import {Enemy} from "../Objects/Enemy";
@@ -80,10 +80,9 @@ export default class GameScene extends TextZoneScene {
         });
         this.enemies.forEach(enemy => {
             this.physics.add.overlap(this.cat, enemy, () => {
-                enemy.catSeen(this.scene);
                 this.gameOver(enemy);
             });
-            this.physics.add.overlap(this.cat, enemy.vision, () => this.physics.moveToObject(enemy, this.cat));
+            this.physics.add.overlap(this.cat, enemy.vision, () => enemy.catSeen = true);
             // TODO impl methode follow enemy + update (sinon il suit qu'une fois)
         });
         this.physics.add.collider(this.obstacles, this.enemies);

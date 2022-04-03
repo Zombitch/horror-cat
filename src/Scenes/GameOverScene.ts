@@ -1,5 +1,5 @@
 import GameScene from "./GameScene";
-import {Cat} from "../Objects/Cat";
+import Cat from "../Objects/Cat";
 import {Enemy} from "../Objects/Enemy";
 import LevelObject from "../Objects/LevelObject";
 
