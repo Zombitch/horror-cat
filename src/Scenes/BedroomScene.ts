@@ -49,7 +49,9 @@ export default class BedroomScene extends GameScene {
         this.cat.updateCat();
         this.enemies.forEach(enemy => { 
             enemy.updateEnemy();
-            if(enemy.catSeen){
+            if(this.cat.isHidden){
+                enemy.setVelocity(0,0)
+            } else if(enemy.catSeen){
                 this.physics.moveToObject(enemy, this.cat);
             }
         });

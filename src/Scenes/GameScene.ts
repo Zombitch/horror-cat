@@ -14,6 +14,7 @@ export default class GameScene extends TextZoneScene {
     protected cat: Cat;
     protected enemies: Enemy[] = [];
     protected obstacles: GameObjects.GameObject[] = [];
+    protected cachettes: GameObjects.GameObject[] = [];
     protected exitRectangle: GameObjects.GameObject;
 
     protected ambiantLight: number = 0xFFFFFF;
@@ -50,6 +51,8 @@ export default class GameScene extends TextZoneScene {
             if (obj.hasCollider) {
                 this.obstacles.push(img);
                 img.setImmovable(true)
+            } else if (obj.name === 'bed') {
+                this.cachettes.push(img);
             }
         });
 
@@ -68,6 +71,11 @@ export default class GameScene extends TextZoneScene {
 
         this.cat = new Cat(this, 210, 680);
         this.physics.add.collider(this.cat, this.obstacles);
+
+        this.physics.add.overlap(this.cat, this.cachettes,
+            (cat: Cat, bed) => {cat.isHidden = true;}
+        );
+
         this.enemies.forEach(enemy => {
             enemy.setDepth(10)
             enemy.vision.setDepth(10);
