@@ -83,6 +83,7 @@ export default class GameScene extends TextZoneScene {
             this.physics.add.overlap(this.cat, enemy.vision, () => {
                 enemy.catSeen = true;
                 enemy.vision.destroy();
+                this.time.removeAllEvents();
             });
             
         });
