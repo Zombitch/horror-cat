@@ -18,7 +18,6 @@ export default class TitleScene extends Phaser.Scene {
     optionsButton: Button;
     creditsButton: Button;
     // le son joué en fond
-    bgMusic: BaseSound;
 
     constructor () {
         super('Title');
@@ -37,12 +36,7 @@ export default class TitleScene extends Phaser.Scene {
         this.add.text(275, 100, 'Il est où ce con de chat', { fontSize: "48px" })
 
         // si la musique est On et qu'elle n'est pas déjà jouée, on la déclenche
-        if (this.model.musicOn && !this.model.bgMusicPlaying) {
-            this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
-            this.bgMusic.play();
-            this.model.bgMusicPlaying = true;
-            this.model.bgMusic = this.bgMusic;
-        }
+
 
         this.input.keyboard.on('keydown-A', () => {
             this.scene.run("Bedroom");
