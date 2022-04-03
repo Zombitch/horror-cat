@@ -91,7 +91,6 @@ export class Enemy extends Physics.Arcade.Sprite {
 
         this.dir = dir;
         this.vision.dir = dir;
-        console.log("coucou tu veux voir mes bits ?");
 
         if(dir == "up"){
             this.setFrame(94);
