@@ -82,8 +82,11 @@ export default class GameScene extends TextZoneScene {
             this.physics.add.overlap(this.cat, enemy, () => {
                 this.gameOver(enemy);
             });
-            this.physics.add.overlap(this.cat, enemy.vision, () => enemy.catSeen = true);
-            // TODO impl methode follow enemy + update (sinon il suit qu'une fois)
+            this.physics.add.overlap(this.cat, enemy.vision, () => {
+                enemy.catSeen = true;
+                enemy.vision.destroy();
+            });
+            
         });
         this.physics.add.collider(this.obstacles, this.enemies);
 
