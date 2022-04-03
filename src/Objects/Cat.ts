@@ -43,19 +43,19 @@ export class Cat extends Physics.Arcade.Sprite {
 
     updateCat(): void {
         this.getBody().setVelocity(0);
-        if (this.scene.input.keyboard.addKey('UP').isDown) {
+        if (this.scene.input.keyboard.addKey('UP').isDown || this.scene.input.keyboard.addKey('Z').isDown) {
             this.body.velocity.y = -210;
             this.anims.play('up', true);
         }
-        if (this.scene.input.keyboard.addKey('LEFT').isDown) {
+        if (this.scene.input.keyboard.addKey('LEFT').isDown || this.scene.input.keyboard.addKey('Q').isDown) {
             this.body.velocity.x = -210;
             this.anims.play('left', true);
         }
-        if (this.scene.input.keyboard.addKey('DOWN').isDown) {
+        if (this.scene.input.keyboard.addKey('DOWN').isDown || this.scene.input.keyboard.addKey('S').isDown) {
             this.body.velocity.y = 210;
             this.anims.play('down', true);
         }
-        if (this.scene.input.keyboard.addKey('RIGHT').isDown) {
+        if (this.scene.input.keyboard.addKey('RIGHT').isDown || this.scene.input.keyboard.addKey('D').isDown) {
             this.body.velocity.x = 210;
             this.anims.play('right', true);
         }
