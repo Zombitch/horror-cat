@@ -50,6 +50,8 @@ export default class BedroomScene extends GameScene {
         this.enemies.forEach(enemy => { 
             enemy.updateEnemy(this, this.cat);
         });
+
+        this.checkHiding();
     }
 
     gameOver(enemy):void{
