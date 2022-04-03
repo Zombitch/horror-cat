@@ -31,7 +31,7 @@ export default class GameScene extends TextZoneScene {
         this.levelObjects.forEach(obj => {
             // On ne charge les images qu'une seule fois, même si dans la propriété 'levelObjects' de la scene nous avons plusieurs fois la même image
             if(!loadedImages.includes(obj.name)){
-                this.load.image(obj.name, '../assets/'+obj.name+'.png');
+                this.load.image(obj.name, 'assets/'+obj.name+'.png');
                 loadedImages.push(obj.name);
             }
         });
