@@ -14,7 +14,7 @@ export default class GameScene extends TextZoneScene {
     protected cat: Cat;
     protected enemies: Enemy[] = [];
     protected obstacles: GameObjects.GameObject[] = [];
-    protected cachettes: GameObjects.GameObject[] = [];
+    protected cachettes: Phaser.Types.Physics.Arcade.ImageWithDynamicBody[] = [];
     protected exitRectangle: GameObjects.GameObject;
 
     protected ambiantLight: number = 0xFFFFFF;
@@ -72,10 +72,6 @@ export default class GameScene extends TextZoneScene {
         this.cat = new Cat(this, 210, 680);
         this.physics.add.collider(this.cat, this.obstacles);
 
-        this.physics.add.overlap(this.cat, this.cachettes,
-            (cat: Cat, bed) => {cat.isHidden = true;}
-        );
-
         this.enemies.forEach(enemy => {
             enemy.setDepth(10).setPipeline('Light2D');
             enemy.vision.setDepth(10).setPipeline('Light2D');
@@ -104,6 +100,12 @@ export default class GameScene extends TextZoneScene {
     updatePlayerSpotlight(): void{
         this.playerSpotlight.x = this.cat.body.position.x;
         this.playerSpotlight.y = this.cat.body.position.y;
+    }
+
+    checkHiding(){
+        this.cachettes.forEach(hiding => {
+            this.cat.isHidden = Phaser.Geom.Intersects.RectangleToRectangle(hiding.getBounds(), this.cat.getBounds());
+        })
     }
 
     createExit(x: number, y: number, scene: string, sceneParams:{} = {}):void {
