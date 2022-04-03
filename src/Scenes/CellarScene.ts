@@ -46,6 +46,8 @@ export default class CellarScene extends GameScene {
         setInterval(() => {
             this.ajouterTexte(miaous[Math.floor(Math.random() * ((miaous.length-1) - 0 +1)) + 0], 'Nestor le chat', 80, 3);
         }, 10*1000);
+        
+        this.createExit(622, 122, 'GameOver', {isGameOver:false, isWin: true});
     }
 
     update(time: number, delta: number): void {
