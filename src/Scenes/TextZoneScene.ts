@@ -37,7 +37,7 @@ export default class TextZoneScene extends Phaser.Scene {
     create():void {
     }
 
-    ajouterTexte(dialogue: string, nom: string, hauteur: number) {
+    ajouterTexte(dialogue: string, nom: string, hauteur: number, timeoutInSecondes: number = 10) {
         this.dialogName = this.add.text(30, 0, "azeazeqdfsdfqsfqsefezfzefsdfsfsqfqdfsqfgsgsqgsqg").setVisible(false);
 
         const widthReduceFactor = 65;
@@ -45,10 +45,10 @@ export default class TextZoneScene extends Phaser.Scene {
             wrapWidth: config.width - (this.textZoneSpacement.left + this.textZoneSpacement.right + widthReduceFactor),
             fixedWidth: config.width - (this.textZoneSpacement.left + this.textZoneSpacement.right + widthReduceFactor),
             fixedHeight: hauteur-(this.textZoneSpacement.top + this.textZoneSpacement.bottom + this.textZoneSpacement.text),
-        }).start(dialogue, 50);
+        }, timeoutInSecondes).start(dialogue, 50);
     }
 
-    createTextBox(x, y, nom: string, config) {
+    createTextBox(x, y, nom: string, config, timeoutInSecondes: number) {
         const wrapWidth = GetValue(config, 'wrapWidth', 0);
         const fixedWidth = GetValue(config, 'fixedWidth', 0);
         const fixedHeight = GetValue(config, 'fixedHeight', 0);
@@ -86,7 +86,7 @@ export default class TextZoneScene extends Phaser.Scene {
            setTimeout(() => {
                this.dialogName.setVisible(false);
                textBox.destroy();
-            }, 10*1000);
+            }, timeoutInSecondes*1000);
         }, this);
 
         return textBox;
