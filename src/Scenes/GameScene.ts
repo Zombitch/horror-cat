@@ -14,7 +14,7 @@ export default class GameScene extends TextZoneScene {
     protected cat: Cat;
     protected enemies: Enemy[] = [];
     protected obstacles: GameObjects.GameObject[] = [];
-    protected exitRectangle;
+    protected exitRectangle: GameObjects.GameObject;
 
     protected ambiantLight: number = 0xFFFFFF;
     protected playerSpotlight: GameObjects.Light;
@@ -67,12 +67,7 @@ export default class GameScene extends TextZoneScene {
         this.physics.add.staticGroup(this.obstacles);
 
         this.cat = new Cat(this, 210, 680);
-        this.exitRectangle = this.add.rectangle(960, 100, 60, 10).setOrigin(0, 0);
-        this.physics.add.staticGroup(this.exitRectangle);
         this.physics.add.collider(this.cat, this.obstacles);
-        this.physics.add.collider(this.cat, this.exitRectangle, () => {
-            console.log('exit')
-        })
         this.enemies.forEach(enemy => {
             enemy.setDepth(10)
             enemy.vision.setDepth(10);
@@ -102,5 +97,13 @@ export default class GameScene extends TextZoneScene {
     updatePlayerSpotlight(): void{
         this.playerSpotlight.x = this.cat.body.position.x;
         this.playerSpotlight.y = this.cat.body.position.y;
+    }
+
+    createExit(x: number, y: number, scene: string):void {
+        this.exitRectangle = this.add.rectangle(x, y, 60, 10).setOrigin(0, 0);
+        this.physics.add.staticGroup(this.exitRectangle);
+        this.physics.add.collider(this.cat, this.exitRectangle, () => {
+            this.scene.start(scene);
+        });
     }
 };
