@@ -5,6 +5,8 @@ import LevelObject from "../Objects/LevelObject";
 
 export default class GameOverScene extends GameScene {
 
+    isGameOver: boolean = true;
+
     constructor() {
         super('GameOver');
         this.levelObjects = [
@@ -16,6 +18,7 @@ export default class GameOverScene extends GameScene {
     init(data): void{
         this.enemies.push(data.mechant);
         this.cat = data.cat;
+        this.isGameOver = data.isGameOver;
     }
 
     preload() : void {
@@ -25,7 +28,7 @@ export default class GameOverScene extends GameScene {
     create(): void {
         const texte: string = `Con de chat enfin je t'attrape!` +
                                 `\nTu vas prendre cher après m'avoir fait courir comme ça !`
-        this.ajouterTexte(texte, 'Humain', 80);
+        this.ajouterTexte(texte, 'Archi', 80);
 
         this.cat = new Cat(this, this.cat.x, this.cat.y);
         this.enemies.forEach(enemy => {
@@ -34,7 +37,13 @@ export default class GameOverScene extends GameScene {
         this.levelObjects.forEach(object => {
             this.add.image(object.x, object.y, object.identifier).setOrigin(0);
         });
-        setTimeout(() => {this.scene.start('Title')}, 1000 * 10);
+
+        if(this.isGameOver) setTimeout(() => {
+            this.scene.start('Title')
+        }, 1000 * 10);
+        else if(!this.isGameOver) setTimeout(() => {
+            this.scene.start('Cellar')
+        }, 1000 * 10);
     }
 
 }
