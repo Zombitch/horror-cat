@@ -41,7 +41,8 @@ export default class GameOverScene extends GameScene {
 
         this.cat = new Cat(this, this.cat.x, this.cat.y);
         this.enemies.forEach(enemy => {
-            new Enemy(this, enemy.x, enemy.y, enemy.dir).setDepth(10);
+            const newEnemy = new Enemy(this, enemy.x, enemy.y, enemy.dir).setDepth(10);
+            newEnemy.vision.setVisible(false);
         });
 
 
