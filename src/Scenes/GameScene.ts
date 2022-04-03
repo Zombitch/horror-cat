@@ -77,7 +77,10 @@ export default class GameScene extends TextZoneScene {
             enemy.vision.setDepth(10);
         });
         this.enemies.forEach(enemy => {
-            this.physics.add.overlap(this.cat, enemy, () => enemy.catSeen(this.scene));
+            this.physics.add.overlap(this.cat, enemy, () => {
+                enemy.catSeen(this.scene);
+                this.gameOver();
+            });
             this.physics.add.overlap(this.cat, enemy.vision, () => this.physics.moveToObject(enemy, this.cat));
             // TODO impl methode follow enemy + update (sinon il suit qu'une fois)
         })
@@ -86,5 +89,9 @@ export default class GameScene extends TextZoneScene {
         this.lights.enable();
         this.lights.setAmbientColor(this.ambiantLight);
         this.playerSpotlight = this.lights.addLight(-10, -10, 280).setIntensity(2);
+    }
+
+    gameOver():void{        
+        this.scene.start('GameOver', {isGameOver: true});
     }
 };

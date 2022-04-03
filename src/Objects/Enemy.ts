@@ -55,7 +55,7 @@ export class Enemy extends Physics.Arcade.Sprite {
     }
 
     catSeen(currentScene){
-        currentScene.start('GameOver')
+        
     }
 
 
