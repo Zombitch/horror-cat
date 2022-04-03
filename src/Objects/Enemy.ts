@@ -8,7 +8,8 @@ export class Enemy extends Physics.Arcade.Sprite {
     vision : Vision;
     dir : string;
     catSeen : boolean;
-    speed: number = 100;
+    defaultSpeed: number = 100;
+    speed: number;
 
     constructor(scene : Scene, x, y, dir : string){
 
@@ -25,6 +26,7 @@ export class Enemy extends Physics.Arcade.Sprite {
         super(scene, x, y, 'enemy_sprites', frameE);
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.speed = this.defaultSpeed;
         this.dir = dir;
         this.body.setSize(this.body.width, this.body.height/2).setOffset(0, this.body.height);
 
@@ -72,11 +74,11 @@ export class Enemy extends Physics.Arcade.Sprite {
 
         if(this.body.velocity.x === 0 && this.body.velocity.y === 0){
             this.anims.stop();
-            this.speed = 100;
+            this.speed = this.defaultSpeed;
         }
         if(cat.isHidden){
             this.setVelocity(0,0)
-            this.speed = 100;
+            this.speed = this.defaultSpeed;
         } else if(this.catSeen){
             scene.physics.moveToObject(this, cat, this.speed);
             this.speed+=0.5;

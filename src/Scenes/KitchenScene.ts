@@ -38,6 +38,14 @@ export default class KitchenScene extends GameScene {
         }, 10*1000);
 
         this.createExit(622, 122, 'GameOver', {isGameOver:false, isWin: true});
+
+        this.enemies.forEach(enemy =>
+            {this.time.addEvent({
+                delay: 2000,
+                callback: ()=>enemy.turnEnemy(),
+                loop: true,
+            });
+        })
     }
 
     update(time: number, delta: number): void {
