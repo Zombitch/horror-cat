@@ -99,11 +99,11 @@ export default class GameScene extends TextZoneScene {
         this.playerSpotlight.y = this.cat.body.position.y;
     }
 
-    createExit(x: number, y: number, scene: string):void {
+    createExit(x: number, y: number, scene: string, sceneParams:{} = {}):void {
         this.exitRectangle = this.add.rectangle(x, y, 60, 10).setOrigin(0, 0);
         this.physics.add.staticGroup(this.exitRectangle);
         this.physics.add.collider(this.cat, this.exitRectangle, () => {
-            this.scene.start(scene);
+            this.scene.start(scene, sceneParams);
         });
     }
 };
