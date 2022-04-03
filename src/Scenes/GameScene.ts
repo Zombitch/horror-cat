@@ -1,6 +1,6 @@
 import 'phaser';
 import { GameObjects } from 'phaser';
-import LevelObject from '../Models/LevelObject';
+import LevelObject from '../Objects/LevelObject';
 import { Cat } from '../Objects/Cat';
 import TextZoneScene from './TextZoneScene';
 import config from "../config";
@@ -15,6 +15,9 @@ export default class GameScene extends TextZoneScene {
     protected enemies: Enemy[] = [];
     protected obstacles: GameObjects.GameObject[] = [];
     protected exitRectangle;
+
+    protected ambiantLight: number = 0xFFFFFF;
+    protected playerSpotlight: GameObjects.Light;
 
     protected levelObjects: LevelObject[]
 
@@ -40,7 +43,7 @@ export default class GameScene extends TextZoneScene {
     create():void {
         super.create();
         this.levelObjects.forEach(obj => {
-            const img = this.physics.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0);
+            const img = this.physics.add.image(obj.x, obj.y, obj.name).setOrigin(0, 0).setPipeline('Light2D');
             img.setDepth(obj.depth);
             obj.objectRef = img;
             if (obj.hasCollider) {
@@ -80,5 +83,8 @@ export default class GameScene extends TextZoneScene {
         })
         this.physics.add.collider(this.obstacles, this.enemies);
 
+        this.lights.enable();
+        this.lights.setAmbientColor(this.ambiantLight);
+        this.playerSpotlight = this.lights.addLight(-10, -10, 280).setIntensity(2);
     }
 };

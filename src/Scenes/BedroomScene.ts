@@ -1,5 +1,5 @@
 import 'phaser';
-import LevelObject from '../Models/LevelObject';
+import LevelObject from '../Objects/LevelObject';
 import TempTextZoneScene from './TextZoneScene'
 import {Cat} from "../Objects/Cat";
 import config from "../config";
@@ -31,7 +31,7 @@ export default class BedroomScene extends GameScene {
             new LevelObject('tv', 'tv', 500, 50, true),
             new LevelObject('tapis', 'tapis', 465, 200, false, 2),
             new LevelObject('chair_A', 'chair', 250, 80, true),
-        ]
+        ];
     }
     
     preload(): void {
@@ -42,9 +42,7 @@ export default class BedroomScene extends GameScene {
         // ajout des méchants avant le super create pour que les méthodes de follow / game over etc soient prises en compte dans la classe parente
         this.enemies.push(new Enemy(this, 580,400, 'north'));
         super.create();
-        LevelObject.find("bedroom", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', (evt) => {
-            this.ajouterTexte(`${evt.position.x} ; y : ${evt.position.y} Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`, 'Alexouille', 80);
-        });
+        LevelObject.find("bedroom", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
     }
 
     update(time: number, delta: number): void {
