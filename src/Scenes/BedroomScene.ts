@@ -40,7 +40,7 @@ export default class BedroomScene extends GameScene {
 
     create():void {
         // ajout des méchants avant le super create pour que les méthodes de follow / game over etc soient prises en compte dans la classe parente
-        this.enemies.push(new Enemy(this, 580,400, 'north'));
+        this.enemies.push(new Enemy(this, 580,400, 'up'));
         super.create();
         LevelObject.find("bedroom", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
     }
