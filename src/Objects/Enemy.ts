@@ -13,11 +13,11 @@ export class Enemy extends Physics.Arcade.Sprite {
 
         let frameE : number = 58;
 
-        if(dir == "north"){
+        if(dir == "up"){
             frameE = 94;
-        }else if(dir == "west"){
+        }else if(dir == "left"){
             frameE = 70;
-        } else if(dir == "east"){
+        } else if(dir == "right"){
             frameE = 82;
         }
 
@@ -73,6 +73,29 @@ export class Enemy extends Physics.Arcade.Sprite {
         if(this.body.velocity.x === 0 && this.body.velocity.y === 0){
             this.anims.stop();
         }
+    }
+
+    turnEnemy(){
+        let dirs = ["up", "down", "left", "right"];
+        let dir : string = dirs[Math.floor(Math.random()*4)];
+
+        this.dir = dir;
+        this.vision.dir = dir;
+        console.log("coucou");
+
+        if(dir == "up"){
+            this.setFrame(94);
+        }else if(dir == "left"){
+            this.setFrame(70);
+        }else if(dir == "right"){
+            this.setFrame(82);
+        }else if( dir === "down"){
+            this.setFrame(58)
+        }
+        
+        //this.anims.play(dir, true)
+
+        this.vision.majVisionDir(this.x, this.y);
     }
 
 }
