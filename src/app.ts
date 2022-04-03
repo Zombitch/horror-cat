@@ -10,6 +10,7 @@ import GameSceneTest from './Scenes/GameSceneTest';
 import BedroomScene from './Scenes/BedroomScene';
 import Model from "./Model";
 import GameOverScene from "./Scenes/GameOverScene";
+import CellarScene from "./Scenes/CellarScene";
 
 class Jeu extends Phaser.Game {
 
@@ -30,6 +31,7 @@ class Jeu extends Phaser.Game {
         this.scene.add('Options', OptionsScene);
         this.scene.add('Credits', CreditScene);
         this.scene.add('GameOver', GameOverScene);
+        this.scene.add('Cellar', CellarScene);
         this.scene.start('Boot');
     }
 }
