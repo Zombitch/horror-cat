@@ -8,6 +8,7 @@ export class Enemy extends Physics.Arcade.Sprite {
     vision : Vision;
     dir : string;
     catSeen : boolean;
+    speed: number = 100;
 
     constructor(scene : Scene, x, y, dir : string){
 
@@ -71,11 +72,14 @@ export class Enemy extends Physics.Arcade.Sprite {
 
         if(this.body.velocity.x === 0 && this.body.velocity.y === 0){
             this.anims.stop();
+            this.speed = 100;
         }
         if(cat.isHidden){
             this.setVelocity(0,0)
+            this.speed = 100;
         } else if(this.catSeen){
-            scene.physics.accelerateToObject(this, cat, 400);
+            scene.physics.moveToObject(this, cat, this.speed);
+            this.speed+=0.5;
         }
     }
 
