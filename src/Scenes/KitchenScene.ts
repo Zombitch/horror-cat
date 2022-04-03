@@ -7,8 +7,16 @@ export default class KitchenScene extends GameScene {
     constructor() {
         super('Kitchen');
         this.levelObjects = [
-            new LevelObject('cellar', 'cellar', 0, 0, false, 1),
+            new LevelObject('kitchen', 'kitchen', 0, 0, false, 1),
+            new LevelObject('kitchenboard', 'kitchenboard', 65, 90, true, 3),
+            new LevelObject('table', 'table', 600, 350, true, 3),
+            new LevelObject('closet', 'closet', 1000, 30, true, 3),
         ];
+        for(let idx=0; idx < Math.random() * (15 - 7) + 7; idx++){
+            const carton: LevelObject = new LevelObject('bouteille'+idx, 'bouteille',  Math.random() * (1060 - 75) + 75, Math.random() * (597 - 136) + 136, true);
+            this.levelObjects.push(carton);
+        }
+
     }
 
     preload(): void {
@@ -17,8 +25,8 @@ export default class KitchenScene extends GameScene {
 
     create():void {
         // ajout des méchants avant le super create pour que les méthodes de follow / game over etc soient prises en compte dans la classe parente
-        this.enemies.push(new Enemy(this,690, 130, 'left'));
-        this.enemies.push(new Enemy(this,400, 300, 'right'));
+        this.enemies.push(new Enemy(this,1000, 600, 'left'));
+        this.enemies.push(new Enemy(this,400, 600, 'up'));
         super.create();
         const miaous: string[] = ['...miaou...', 'Miaou !!', 'Miaou', 'Miaou...', 'Mew...'];
         LevelObject.find("cellar", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
