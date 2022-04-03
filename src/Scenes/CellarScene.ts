@@ -10,12 +10,12 @@ import {Enemy} from "../Objects/Enemy";
 /**
  * Scène du jeu
  */
-export default class BedroomScene extends GameScene {
+export default class CellarScene extends GameScene {
 
     mechant: Enemy;
 
     constructor () {
-        super('Bedroom');
+        super('Cellar');
 
         this.levelObjects = [
             new LevelObject('bedroom', 'bedroom', 0, 0, false, 1),
@@ -32,6 +32,8 @@ export default class BedroomScene extends GameScene {
             new LevelObject('tapis', 'tapis', 465, 200, false, 2),
             new LevelObject('chair_A', 'chair', 250, 80, true),
         ];
+
+        this.ambiantLight = 0x101010;
     }
     
     preload(): void {
@@ -47,9 +49,7 @@ export default class BedroomScene extends GameScene {
 
     update(time: number, delta: number): void {
         this.cat.updateCat();
-        this.enemies.forEach(enemy => { 
-            enemy.updateEnemy();
-        });
+        this.updatePlayerSpotlight();
     }
 
     gameOver():void{

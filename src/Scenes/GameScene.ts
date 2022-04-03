@@ -76,6 +76,7 @@ export default class GameScene extends TextZoneScene {
         this.enemies.forEach(enemy => {
             enemy.setDepth(10)
             enemy.vision.setDepth(10);
+            enemy.setPipeline('Light2D');
         });
         this.enemies.forEach(enemy => {
             this.physics.add.overlap(this.cat, enemy, () => {
@@ -89,10 +90,15 @@ export default class GameScene extends TextZoneScene {
 
         this.lights.enable();
         this.lights.setAmbientColor(this.ambiantLight);
-        this.playerSpotlight = this.lights.addLight(-10, -10, 280).setIntensity(2);
+        this.playerSpotlight = this.lights.addLight(-100, -100, 280).setIntensity(2);
     }
 
     gameOver():void{        
         this.scene.start('GameOver', {isGameOver: true});
+    }
+
+    updatePlayerSpotlight(): void{
+        this.playerSpotlight.x = this.cat.body.position.x;
+        this.playerSpotlight.y = this.cat.body.position.y;
     }
 };
