@@ -79,11 +79,11 @@ export default class GameScene extends TextZoneScene {
         this.enemies.forEach(enemy => {
             this.physics.add.overlap(this.cat, enemy, () => {
                 enemy.catSeen(this.scene);
-                this.gameOver();
+                this.gameOver(enemy);
             });
             this.physics.add.overlap(this.cat, enemy.vision, () => this.physics.moveToObject(enemy, this.cat));
             // TODO impl methode follow enemy + update (sinon il suit qu'une fois)
-        })
+        });
         this.physics.add.collider(this.obstacles, this.enemies);
 
         this.lights.enable();
@@ -91,7 +91,7 @@ export default class GameScene extends TextZoneScene {
         this.playerSpotlight = this.lights.addLight(-10, -10, 280).setIntensity(2);
     }
 
-    gameOver():void{        
-        this.scene.start('GameOver', {isGameOver: true});
+    gameOver(enemy: Enemy):void{
+        this.scene.start('GameOver', {isGameOver: true, cat: this.cat, mechant: enemy});
     }
 };

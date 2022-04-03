@@ -5,10 +5,11 @@ import Vision from './Vision'
 export class Enemy extends Physics.Arcade.Sprite {
 
     vision : Vision;
+    dir: string;
 
     constructor(scene : Scene, x, y, dir : string){
         super(scene, x, y, 'baddy');
-        this.scene = scene;
+        this.dir = dir;
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setCircle(50);
