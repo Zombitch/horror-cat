@@ -7,6 +7,10 @@ export default class GameOverScene extends GameScene {
         this.levelObjects = [];
     }
 
+    init(data): void{
+        console.log(data);
+    }
+
     preload() : void {
         super.preload();
     }
