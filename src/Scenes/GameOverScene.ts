@@ -6,6 +6,7 @@ import LevelObject from "../Objects/LevelObject";
 export default class GameOverScene extends GameScene {
 
     isGameOver: boolean = true;
+    isWin: boolean = false;
 
     constructor() {
         super('GameOver');
@@ -20,6 +21,7 @@ export default class GameOverScene extends GameScene {
         this.enemies.push(data.mechant);
         this.cat = data.cat;
         this.isGameOver = data.isGameOver;
+        this.isWin = data.isWin;
     }
 
     preload() : void {
@@ -27,31 +29,42 @@ export default class GameOverScene extends GameScene {
     }
 
     create(): void {
-        const texte: string = `Con de chat enfin je t'attrape!` +
-                                `\nTu vas prendre cher après m'avoir fait courir comme ça !`
-        this.ajouterTexte(texte, 'Archi', 80);
-
-        if(this.isGameOver){
-            const bgBad = this.levelObjects.find(object => object.identifier === 'gameover_bad');
-            this.add.image(bgBad.x, bgBad.y, bgBad.name).setOrigin(0)
-        }else {
-            const bgFalse = this.levelObjects.find(object => object.identifier === 'gameover_false');
-            this.add.image(bgFalse.x, bgFalse.y, bgFalse.name).setOrigin(0)
+        if(!this.isWin){
+            if(this.isGameOver){            
+                const texteOver: string = `Con de chat enfin je t'attrape!` +
+                `\nTu vas prendre cher après m'avoir fait courir comme ça !`;
+                const bgBad = this.levelObjects.find(object => object.identifier === 'gameover_bad');
+                this.add.image(bgBad.x, bgBad.y, bgBad.name).setOrigin(0);
+                this.ajouterTexte(texteOver, 'Archi', 80);
+            }else {
+                const texteNotRealyOver: string = `Con de chat enfin je t'attrape! Je vais te foutre dans la cave !` +
+                                        `\nTu vas prendre cher après m'avoir fait courir comme ça !`
+                const bgFalse = this.levelObjects.find(object => object.identifier === 'gameover_false');
+                this.add.image(bgFalse.x, bgFalse.y, bgFalse.name).setOrigin(0)
+                this.ajouterTexte(texteNotRealyOver, 'Archi', 80);
+            }
+        }else{
+            this.ajouterTexte('Enfin libre ! Miaou !!!!! Miaou mew mew', 'Nestor le chat', 80);
         }
 
         this.cat = new Cat(this, this.cat.x, this.cat.y);
         this.enemies.forEach(enemy => {
-            new Enemy(this, enemy.x, enemy.y, enemy.dir).setDepth(10);
+            const newEnemy = new Enemy(this, enemy.x, enemy.y, enemy.dir).setDepth(10);
+            newEnemy.vision.setVisible(false);
         });
 
 
-
-        if(this.isGameOver) setTimeout(() => {
-            this.scene.start('Title')
-        }, 1000 * 10);
-        else if(!this.isGameOver) setTimeout(() => {
-            this.scene.start('Cellar')
-        }, 1000 * 10);
+        if(!this.isWin){
+            if(this.isGameOver) setTimeout(() => {
+                this.scene.start('Title')
+            }, 1000 * 10);
+            else if(!this.isGameOver) setTimeout(() => {
+                this.scene.start('Cellar')
+            }, 1000 * 10);
+        }else if (this.isWin){
+            setTimeout(() => {
+                this.scene.start('Title')
+            }, 1000 * 10);
+        }
     }
-
 }

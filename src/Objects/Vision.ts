@@ -14,7 +14,6 @@ export default class Vision  extends Physics.Arcade.Sprite {
         this.majVisionDir(x,y);
         this.alpha = 0.5
 
-        
     }
 
     majVisionDir(x, y){

@@ -35,20 +35,27 @@ export default class CellarScene extends GameScene {
 
     create():void {
         // ajout des méchants avant le super create pour que les méthodes de follow / game over etc soient prises en compte dans la classe parente
+        this.enemies.push(new Enemy(this,690, 130, 'west'));
+        this.enemies.push(new Enemy(this,400, 300, 'east'));
         super.create();
         const miaous: string[] = ['...miaou...', 'Miaou !!', 'Miaou', 'Miaou...', 'Mew...'];
-        LevelObject.find("bedroom", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
+        LevelObject.find("cellar", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
         
         // Chat qui miaule aléatoirement
         this.ajouterTexte(miaous[Math.floor(Math.random() * ((miaous.length-1) - 0 +1)) + 0], 'Nestor le chat', 80, 3);
         setInterval(() => {
             this.ajouterTexte(miaous[Math.floor(Math.random() * ((miaous.length-1) - 0 +1)) + 0], 'Nestor le chat', 80, 3);
         }, 10*1000);
+        
+        this.createExit(622, 122, 'GameOver', {isGameOver:false, isWin: true});
     }
 
     update(time: number, delta: number): void {
         this.cat.updateCat();
         this.updatePlayerSpotlight();
+        this.enemies.forEach(enemy => {
+            enemy.updateEnemy(this, this.cat);
+        });
     }
 
     gameOver():void{

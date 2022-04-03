@@ -14,7 +14,8 @@ export default class GameScene extends TextZoneScene {
     protected cat: Cat;
     protected enemies: Enemy[] = [];
     protected obstacles: GameObjects.GameObject[] = [];
-    protected exitRectangle;
+    protected cachettes: GameObjects.GameObject[] = [];
+    protected exitRectangle: GameObjects.GameObject;
 
     protected ambiantLight: number = 0xFFFFFF;
     protected playerSpotlight: GameObjects.Light;
@@ -31,7 +32,7 @@ export default class GameScene extends TextZoneScene {
         this.levelObjects.forEach(obj => {
             // On ne charge les images qu'une seule fois, même si dans la propriété 'levelObjects' de la scene nous avons plusieurs fois la même image
             if(!loadedImages.includes(obj.name)){
-                this.load.image(obj.name, '../assets/'+obj.name+'.png');
+                this.load.image(obj.name, 'assets/'+obj.name+'.png');
                 loadedImages.push(obj.name);
             }
         });
@@ -50,6 +51,8 @@ export default class GameScene extends TextZoneScene {
             if (obj.hasCollider) {
                 this.obstacles.push(img);
                 img.setImmovable(true)
+            } else if (obj.name === 'bed') {
+                this.cachettes.push(img);
             }
         });
 
@@ -67,12 +70,12 @@ export default class GameScene extends TextZoneScene {
         this.physics.add.staticGroup(this.obstacles);
 
         this.cat = new Cat(this, 210, 680);
-        this.exitRectangle = this.add.rectangle(960, 100, 60, 10).setOrigin(0, 0);
-        this.physics.add.staticGroup(this.exitRectangle);
         this.physics.add.collider(this.cat, this.obstacles);
-        this.physics.add.collider(this.cat, this.exitRectangle, () => {
-            console.log('exit')
-        })
+
+        this.physics.add.overlap(this.cat, this.cachettes,
+            (cat: Cat, bed) => {cat.isHidden = true;}
+        );
+
         this.enemies.forEach(enemy => {
             enemy.setDepth(10)
             enemy.vision.setDepth(10);
@@ -102,5 +105,13 @@ export default class GameScene extends TextZoneScene {
     updatePlayerSpotlight(): void{
         this.playerSpotlight.x = this.cat.body.position.x;
         this.playerSpotlight.y = this.cat.body.position.y;
+    }
+
+    createExit(x: number, y: number, scene: string, sceneParams:{} = {}):void {
+        this.exitRectangle = this.add.rectangle(x, y, 60, 10).setOrigin(0, 0);
+        this.physics.add.staticGroup(this.exitRectangle);
+        this.physics.add.collider(this.cat, this.exitRectangle, () => {
+            this.scene.start(scene, sceneParams);
+        });
     }
 };

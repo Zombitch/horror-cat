@@ -48,12 +48,8 @@ export default class BedroomScene extends GameScene {
     update(time: number, delta: number): void {
         this.cat.updateCat();
         this.enemies.forEach(enemy => { 
-            enemy.updateEnemy();
-            if(enemy.catSeen){
-                this.physics.moveToObject(enemy, this.cat);
-            }
+            enemy.updateEnemy(this, this.cat);
         });
-        
     }
 
     gameOver(enemy):void{

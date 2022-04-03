@@ -3,6 +3,17 @@ import {Physics, Scene} from "phaser";
 import config from "../config";
 
 export default class Cat extends Physics.Arcade.Sprite {
+
+    _isHidden: boolean;
+
+    get isHidden(): boolean{
+        return this._isHidden
+    }
+    set isHidden(hidden: boolean) {
+        this._isHidden = hidden
+    }
+
+
     constructor(scene: Phaser.Scene, x: number, y: number){
         super(scene, x, y, 'cat_sprites', 34); //key is texture
         scene.add.existing(this);
@@ -10,7 +21,7 @@ export default class Cat extends Physics.Arcade.Sprite {
         this.getBody().setCollideWorldBounds(true);
         this.getBody().setSize(48, 24).setOffset(0, 24);
         this.setDepth(3);
-
+        this.isHidden = false;
         this.anims.create({
             key:"left",
             frames: this.anims.generateFrameNumbers('cat_sprites', { start: 21, end: 23 }),
@@ -44,18 +55,22 @@ export default class Cat extends Physics.Arcade.Sprite {
     updateCat(): void {
         this.getBody().setVelocity(0);
         if (this.scene.input.keyboard.addKey('UP').isDown || this.scene.input.keyboard.addKey('Z').isDown) {
+            this.checkOverlap();
             this.body.velocity.y = -210;
             this.anims.play('up', true);
         }
         if (this.scene.input.keyboard.addKey('LEFT').isDown || this.scene.input.keyboard.addKey('Q').isDown) {
+            this.checkOverlap();
             this.body.velocity.x = -210;
             this.anims.play('left', true);
         }
         if (this.scene.input.keyboard.addKey('DOWN').isDown || this.scene.input.keyboard.addKey('S').isDown) {
+            this.checkOverlap();
             this.body.velocity.y = 210;
             this.anims.play('down', true);
         }
         if (this.scene.input.keyboard.addKey('RIGHT').isDown || this.scene.input.keyboard.addKey('D').isDown) {
+            this.checkOverlap();
             this.body.velocity.x = 210;
             this.anims.play('right', true);
         }
@@ -63,10 +78,15 @@ export default class Cat extends Physics.Arcade.Sprite {
         if(this.getBody().velocity.x === 0 && this.getBody().velocity.y === 0 ){
             this.anims.stop();
         }
+
     }
 
     protected getBody(): Physics.Arcade.Body {
         return this.body as Physics.Arcade.Body;
+    }
+
+    checkOverlap() {
+        this.isHidden = !this.body.touching.none;
     }
 }
 
