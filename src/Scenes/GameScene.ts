@@ -91,7 +91,9 @@ export default class GameScene extends TextZoneScene {
 
         this.lights.enable();
         this.lights.setAmbientColor(this.ambiantLight);
-        this.playerSpotlight = this.lights.addLight(-100, -100, 280).setIntensity(2);
+
+        if(this.ambiantLight == 0xFFFFFF) this.playerSpotlight = this.lights.addLight(-100, -100, 280).setIntensity(2);
+        else this.playerSpotlight = this.lights.addLight(-100, -100, 120).setIntensity(2);
     }
 
     gameOver(enemy: Enemy):void{

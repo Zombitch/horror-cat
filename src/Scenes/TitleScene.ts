@@ -62,5 +62,10 @@ export default class TitleScene extends Phaser.Scene {
             this.scene.stop();
         })
 
+        this.input.keyboard.on('keydown-N', () => {
+            this.scene.run("Kitchen");
+            this.scene.stop();
+        })
+
     }
 };

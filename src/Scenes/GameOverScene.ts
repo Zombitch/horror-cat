@@ -63,7 +63,7 @@ export default class GameOverScene extends GameScene {
             }, 1000 * 10);
             else if(!this.isGameOver) setTimeout(() => {
                 this.scene.start('Cellar')
-            }, 1000 * 10);
+            }, 1000 * 5);
         }else if (this.isWin){
             setTimeout(() => {
                 this.scene.start('Title')
