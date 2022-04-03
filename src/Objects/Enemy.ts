@@ -54,8 +54,8 @@ export class Enemy extends Physics.Arcade.Sprite {
         });
     }
 
-    catSeen(){
-        console.log("seen");
+    catSeen(currentScene){
+        currentScene.start('GameOver')
     }
 
 

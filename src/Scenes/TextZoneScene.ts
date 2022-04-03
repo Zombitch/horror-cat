@@ -35,10 +35,11 @@ export default class TextZoneScene extends Phaser.Scene {
     }
 
     create():void {
-        this.dialogName = this.add.text(30, 0, "azeazeqdfsdfqsfqsefezfzefsdfsfsqfqdfsqfgsgsqgsqg").setVisible(false);
     }
 
     ajouterTexte(dialogue: string, nom: string, hauteur: number) {
+        this.dialogName = this.add.text(30, 0, "azeazeqdfsdfqsfqsefezfzefsdfsfsqfqdfsqfgsgsqgsqg").setVisible(false);
+
         const widthReduceFactor = 65;
         this.createTextBox(10, config.height-hauteur+5 , nom, {
             wrapWidth: config.width - (this.textZoneSpacement.left + this.textZoneSpacement.right + widthReduceFactor),

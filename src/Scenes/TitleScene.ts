@@ -53,5 +53,10 @@ export default class TitleScene extends Phaser.Scene {
             this.scene.run("GameTest");
             this.scene.stop();
         })
+        this.input.keyboard.on('keydown-E', () => {
+            this.scene.run("GameOver");
+            this.scene.stop();
+        })
+
     }
 };
