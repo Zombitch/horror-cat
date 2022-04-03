@@ -13,6 +13,7 @@ export default class GameOverScene extends GameScene {
         this.levelObjects = [
             new LevelObject('gameover_false', 'gameover_bg', 0, 0, false, 1000),
             new LevelObject('gameover_bad', 'gameover_badending_bg', 0, 0, false, 1000),
+            new LevelObject('gameover_good', 'victory_bg', 0, 0, false, 1000),
         ];
         this.ambiantLight = 0x555555;
     }
@@ -44,6 +45,8 @@ export default class GameOverScene extends GameScene {
                 this.ajouterTexte(texteNotRealyOver, 'Archi', 80);
             }
         }else{
+            const bgGood = this.levelObjects.find(object => object.identifier === 'gameover_good');
+            this.add.image(bgGood.x, bgGood.y, bgGood.name).setOrigin(0)
             this.ajouterTexte('Enfin libre ! Miaou !!!!! Miaou mew mew', 'Nestor le chat', 80);
         }
 
