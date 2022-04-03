@@ -77,9 +77,8 @@ export default class GameScene extends TextZoneScene {
         );
 
         this.enemies.forEach(enemy => {
-            enemy.setDepth(10)
-            enemy.vision.setDepth(10);
-            enemy.setPipeline('Light2D');
+            enemy.setDepth(10).setPipeline('Light2D');
+            enemy.vision.setDepth(10).setPipeline('Light2D');
         });
         this.enemies.forEach(enemy => {
             this.physics.add.overlap(this.cat, enemy, () => {
