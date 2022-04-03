@@ -42,7 +42,6 @@ export default class KitchenScene extends GameScene {
 
     update(time: number, delta: number): void {
         this.cat.updateCat();
-        this.updatePlayerSpotlight();
         this.enemies.forEach(enemy => {
             enemy.updateEnemy(this, this.cat);
         });
