@@ -13,7 +13,9 @@ export default class GameOverScene extends GameScene {
 
     create(): void {
         super.preload();
-        this.ajouterTexte('Con de chat enfin je t\'attrape', 'Humain', 80);
+        const texte: string = `Con de chat enfin je t'attrape!` +
+                                `\nTu vas prendre cher après m'avoir fait courir comme ça !`
+        this.ajouterTexte(texte, 'Humain', 80);
     }
 
 }
