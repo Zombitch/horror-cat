@@ -74,7 +74,7 @@ export class Enemy extends Physics.Arcade.Sprite {
         if(cat.isHidden){
             this.setVelocity(0,0)
         } else if(this.catSeen){
-            scene.physics.moveToObject(this, cat);
+            scene.physics.accelerateToObject(this, cat, 400);
         }
     }
 
@@ -84,7 +84,7 @@ export class Enemy extends Physics.Arcade.Sprite {
 
         this.dir = dir;
         this.vision.dir = dir;
-        console.log("coucou");
+        console.log("coucou tu veux voir mes bits ?");
 
         if(dir == "up"){
             this.setFrame(94);
