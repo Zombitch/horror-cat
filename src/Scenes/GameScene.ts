@@ -1,6 +1,6 @@
 import 'phaser';
 import { GameObjects } from 'phaser';
-import LevelObject from '../Models/LevelObject';
+import LevelObject from '../Objects/LevelObject';
 import { Cat } from '../Objects/Cat';
 import TextZoneScene from './TextZoneScene';
 import config from "../config";

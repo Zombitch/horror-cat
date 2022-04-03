@@ -1,5 +1,5 @@
 import 'phaser';
-import LevelObject from '../Models/LevelObject';
+import LevelObject from '../Objects/LevelObject';
 import TempTextZoneScene from './TextZoneScene'
 import {Cat} from "../Objects/Cat";
 import config from "../config";
