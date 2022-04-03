@@ -23,7 +23,6 @@ export class Enemy extends Physics.Arcade.Sprite {
         super(scene, x, y, 'enemy_sprites', frameE);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setCircle(50);
         this.dir = dir;
 
         this.vision = new Vision(scene, this.x, this.y, dir);
