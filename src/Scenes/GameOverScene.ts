@@ -26,17 +26,19 @@ export default class GameOverScene extends GameScene {
         super.preload();
     }
 
-    create(): void {
-        const texte: string = `Con de chat enfin je t'attrape!` +
-                                `\nTu vas prendre cher après m'avoir fait courir comme ça !`
-        this.ajouterTexte(texte, 'Archi', 80);
-
-        if(this.isGameOver){
+    create(): void {      
+        if(this.isGameOver){            
+            const texteOver: string = `Con de chat enfin je t'attrape!` +
+            `\nTu vas prendre cher après m'avoir fait courir comme ça !`;
             const bgBad = this.levelObjects.find(object => object.identifier === 'gameover_bad');
-            this.add.image(bgBad.x, bgBad.y, bgBad.name).setOrigin(0)
+            this.add.image(bgBad.x, bgBad.y, bgBad.name).setOrigin(0);
+            this.ajouterTexte(texteOver, 'Archi', 80);
         }else {
+            const texteNotRealyOver: string = `Con de chat enfin je t'attrape! Je vais te foutre dans la cave !` +
+                                    `\nTu vas prendre cher après m'avoir fait courir comme ça !`
             const bgFalse = this.levelObjects.find(object => object.identifier === 'gameover_false');
             this.add.image(bgFalse.x, bgFalse.y, bgFalse.name).setOrigin(0)
+            this.ajouterTexte(texteNotRealyOver, 'Archi', 80);
         }
 
         this.cat = new Cat(this, this.cat.x, this.cat.y);

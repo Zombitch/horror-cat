@@ -43,7 +43,6 @@ export default class BedroomScene extends GameScene {
         this.enemies.push(new Enemy(this, 580,400, 'north'));
         super.create();
         LevelObject.find("bedroom", this.levelObjects)?.objectRef.setInteractive().on('pointerdown', evt => console.log(`${evt.position.x} ; y : ${evt.position.y}`))
-        this.createExit(960,200, 'Cellar');
     }
 
     update(time: number, delta: number): void {
