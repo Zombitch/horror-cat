@@ -72,5 +72,4 @@ export class Enemy extends Physics.Arcade.Sprite {
             this.anims.stop();
         }
     }
-
 }
